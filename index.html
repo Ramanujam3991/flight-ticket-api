@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.search-flight').click(function(){
+                
+            //     $.ajax({
+            //     type: "POST",
+            //     url: "fetch-flight-data",
+            //     success: function(data){
+            //         alert(data);
+            //         console.log(JSON.parse(data))
+            //         $('body').html(data)
+            //     }
+            // });
+            var from = $('.from').val();
+            var to = $('.to').val();
+            var url = "/fetch-flight-data?from="+from+"&to="+to;
+            $.get( url, function( data ) {
+                if(data=="[]")
+                    data = "No results found"
+                $('.result').text(data);
+                });
+
+            })
+           
+
+        })// jQuery End
+    </script>
+</head>
+<body>
+    <form method="GET" action="#">
+        Source:
+        <input type="text" class="from">   <br/>
+        Destination:
+        <input type="text" class="to">   <br/>
+        
+        <input type="button" value="search flight" class="search-flight" > 
+        <div class="result"></div>
+    </form>
+</body>
+</html>
